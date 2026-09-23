@@ -13,15 +13,15 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h1`
-	color: ${(props) => props.theme.colors.text};
-	font-size: 3rem;
+	color: ${(props) => props.theme.colors.primary};
+	font-size: 4rem;
 	font-family: 'Pacifico', cursive;
 	background-color: transparent;
 `
 export const  Subtitle = styled.h2`
-	color: ${(props) => props.theme.colors.text};
+	color: ${(props) => props.theme.colors.primary};
 	font-size: 1.5rem;
 	font-family: 'Poppins', sans-serif;
-	font-weight: light;
+	font-weight: 200;
 	background-color: transparent;
 `

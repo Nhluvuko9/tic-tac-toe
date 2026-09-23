@@ -11,7 +11,7 @@ function Game() {
   return (
     <Container>
       <GameBoardStyle>
-        {game.board.map((item, index) => (
+        {Object.values(game.board).map((item, index) => (
           <GameCell key={index} cellItem={item} index={index}/>
         ))}
       </GameBoardStyle>

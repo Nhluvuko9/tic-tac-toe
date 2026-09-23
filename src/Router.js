@@ -5,6 +5,8 @@ import Game from "./pages/Game/Game";
 import Details from "./pages/Details/Details";
 import Header from './components/Header/Header';
 
+
+
 function Router() {
   return (
     <BrowserRouter>
