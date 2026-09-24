@@ -22,7 +22,12 @@ export const ModalContainer = styled.div`
     margin: 0 auto;
     min-width: 480px;
     background: white;
-    color: $((props) => props.theme.colors.primary);
+    color: ${(props) => props.theme.colors.primary};
+
+    ${(props) => props.theme.media.mobile} {
+        min-width: 200px;
+        padding: 20px 10px;
+    }
 `;
 
 export const ModalHeader = styled.div`
