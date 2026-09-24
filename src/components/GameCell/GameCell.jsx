@@ -11,12 +11,15 @@ import { ReactComponent as OIconOutline } from '../../assets/circle-circle-outli
 
 
 function GameCell({ cellItem, index }) {
-  const { updateBoard, game } = useContext(GameContext);
+  const { updateBoard, game, roundComplete } = useContext(GameContext);
   const { handleModal } = useContext(ModalContext);
 
   const handleCellClick = () => {
-    updateBoard(index)
-    if (checkForWinner(game.board)) {
+    updateBoard(index);
+    const result = checkForWinner(game.board);
+
+    if (result) {
+      roundComplete(result);
       handleModal(<RoundOverModal />)
     }
   };

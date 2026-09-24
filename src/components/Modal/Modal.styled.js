@@ -22,7 +22,7 @@ export const ModalContainer = styled.div`
     margin: 0 auto;
     min-width: 480px;
     background: white;
-    background-color: $(({ theme }) => theme.colors.secondary);
+    color: $((props) => props.theme.colors.primary);
 `;
 
 export const ModalHeader = styled.div`

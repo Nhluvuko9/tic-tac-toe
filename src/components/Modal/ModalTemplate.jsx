@@ -9,7 +9,9 @@ function ModalTemplate() {
 
     if(modal) {
         return ReactDOM.createPortal(
-            <ModalBackdrop><ModalContainer>{modalContext}</ModalContainer></ModalBackdrop>,
+            <ModalBackdrop>
+                <ModalContainer>{modalContext}</ModalContainer>
+            </ModalBackdrop>,
             document.getElementById('modal-root')
         );   
     }

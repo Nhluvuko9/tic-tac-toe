@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 function Home() {
   const navigate = useNavigate();
   return (
-    <Container>
+    <Container columnBased>
       <Title>TicTacToe</Title>
       <Subtitle>Highest score wins</Subtitle>
       <Button onClick={() => navigate("/game-on")}>Play Now</Button>
