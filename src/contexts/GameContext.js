@@ -1,36 +1,88 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { genConfig } from 'react-nice-avatar';
 
+const newGame = () => ({
+    board: [null, null, null, null, null, null, null, null, null],
+    player1: {
+        choice: "x",
+        name: "Zena",
+        score: 0,
+        color: "#bb98f1",
+        avatarConfig: genConfig()
+    },
+    player2: {
+        choice: "o",
+        name: "Kim",
+        score: 0,
+        color: "#e4ce7b",
+        avatarConfig: genConfig()
+    },
+    turn: "x",
+    roundWinner: ""
+})
 
 export const GameContext = createContext({});
+const TURN_TIME = 10;
 
 export const GameContextProvider = (props) => {
-    const [game, setGame] = useState({
-        board: [null, null, null, null, null, null, null, null, null],
-        player1: {
-            choice: "x",
-            name: "Zena",
-            score: 0,
-            color: "#8437f9",
-            avatarConfig: genConfig()
-        },
-        player2: {
-            choice: "o",
-            name: "Kim",
-            score: 0,
-            color: "#f9c811",
-            avatarConfig: genConfig()
-        },
-        turn: "x",
-        roundWinner: ""
-    });
+    const [timeLeft, setTimeLeft] = useState(TURN_TIME);
+    const [game, setGame] = useState(newGame);
+    
+
+    
+    // const [game, setGame] = useState({
+    //     board: [null, null, null, null, null, null, null, null, null],
+    //     player1: {
+    //         choice: "x",
+    //         name: "Zena",
+    //         score: 0,
+    //         color: "#bb98f1",
+    //         avatarConfig: genConfig()
+    //     },
+    //     player2: {
+    //         choice: "o",
+    //         name: "Kim",
+    //         score: 0,
+    //         color: "#e4ce7b",
+    //         avatarConfig: genConfig()
+    //     },
+    //     turn: "x",
+    //     roundWinner: ""
+    // });
+
+    useEffect(() => {
+        const roundIsOver = Boolean(game.roundWinner) || game.board.every(cell => cell !== null);
+
+        if (roundIsOver) {
+            setTimeLeft(0);
+            return;
+        }
+
+        setTimeLeft(TURN_TIME);
+
+        const timer = setInterval(() => {
+            setTimeLeft(prevTime => {
+                if (prevTime <= 1) {
+                    setGame(prevGame => ({
+                        ...prevGame,
+                        turn: prevGame.turn === "x" ? "o" : "x"
+                    }));
+                    return TURN_TIME;
+                }
+
+                return prevTime - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [game.board, game.roundWinner, game.turn]);
 
     const updateBoard = (index) => {
-        let updatedBoard = game.board;
+        const updatedBoard = [...game.board];
         updatedBoard[index] = game.turn;
         setGame({
             ...game,
-            board: updateBoard,
+            board: updatedBoard,
             turn: game.turn === "x" ? "o" : "x"
         });
     };
@@ -39,6 +91,7 @@ export const GameContextProvider = (props) => {
         setGame({
             ...game,
             board: [null, null, null, null, null, null, null, null, null],
+            roundWinner: "",
         })
     }
 
@@ -87,7 +140,7 @@ export const GameContextProvider = (props) => {
     const roundComplete = (result) => {
         if (game.turn === game.player1.choice && result !== "draw") {
             updateScore("player1")
-        } else if (game.turn === game.player1.choice && result !== "draw") {
+        } else if (result !== "draw") {
             updateScore("player2")
         } else {
             console.log("DRAW");
@@ -95,9 +148,14 @@ export const GameContextProvider = (props) => {
         }
         switchTurn();
     }
+     
+    const restartGame = () => {
+        setGame(newGame());
+        setTimeLeft(TURN_TIME);
+    };
 
     return (
-        <GameContext.Provider value={{ game, updateBoard, resetBoard, roundComplete }}>
+        <GameContext.Provider value={{ game, timeLeft, updateBoard, resetBoard, roundComplete, restartGame }}>
             {props.children}
         </GameContext.Provider>
     );

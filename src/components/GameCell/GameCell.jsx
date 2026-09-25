@@ -15,8 +15,10 @@ function GameCell({ cellItem, index }) {
   const { handleModal } = useContext(ModalContext);
 
   const handleCellClick = () => {
+    const updatedBoard = [...game.board];
+    updatedBoard[index] = game.turn;
     updateBoard(index);
-    const result = checkForWinner(game.board);
+    const result = checkForWinner(updatedBoard);
 
     if (result) {
       roundComplete(result);

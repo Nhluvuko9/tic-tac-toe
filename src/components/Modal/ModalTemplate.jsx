@@ -5,12 +5,12 @@ import { ModalBackdrop, ModalContainer } from './Modal.styled';
 
 
 function ModalTemplate() {
-    const { modalContext, modal } = useContext(ModalContext);
+    const { modalContent, modal } = useContext(ModalContext);
 
     if(modal) {
         return ReactDOM.createPortal(
             <ModalBackdrop>
-                <ModalContainer>{modalContext}</ModalContainer>
+                <ModalContainer>{modalContent}</ModalContainer>
             </ModalBackdrop>,
             document.getElementById('modal-root')
         );   

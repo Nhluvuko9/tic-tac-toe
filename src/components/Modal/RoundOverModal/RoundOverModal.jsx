@@ -6,28 +6,31 @@ import { GameContext } from '../../../contexts/GameContext';
 import { ModalContext } from '../../../contexts/ModalContext';
 
 
-
 function RoundOverModal() {
-  const { resetBoard, game } = useContext(GameContext);
+  const { resetBoard, restartGame, game } = useContext(GameContext);
   const { handleModal } = useContext(ModalContext);
 
   return (
     <>
         <ModalHeader>
-          <Title primary>{game.roundWinner.name ? `${game.roundWinner.name} wins this round` : "Round drawn"}</Title>
+          <Title text>{game.roundWinner.name ? `${game.roundWinner.name} wins round` : "Round drawn"}</Title>
         </ModalHeader>
         <ModalBody>
-            <Subtitle primary>Choices will be switched now.</Subtitle>
-            <Subtitle primary>{game.player1.name}: {game.player1.score}</Subtitle>
-            <Subtitle primary>{game.player2.name}: {game.player2.score}</Subtitle>
+            <Subtitle text>Choices will be switched now.</Subtitle>
+            <Subtitle text>{game.player1.name}: {game.player1.score}</Subtitle>
+            <Subtitle text>{game.player2.name}: {game.player2.score}</Subtitle>
         </ModalBody>
         <ModalFooter>
-            <Button color="#e4ce7b" onClick={() => { 
+            <Button style={{backgroundColor: "#eed785"}} onClick={() => { 
               handleModal(); 
               resetBoard() 
               }}>Continue
             </Button>
-            <Button color="#bb98f1">Restart</Button>
+            <Button style={{backgroundColor: "#bb98f1"}} onClick={() => {
+              handleModal(); 
+              restartGame();
+              }}>Restart
+            </Button>
         </ModalFooter>
     </>
   )

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 
 function Home() {
   const navigate = useNavigate();
+
   return (
     <Container columnBased>
       <Title>TicTacToe</Title>

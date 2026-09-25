@@ -24,22 +24,12 @@ export const checkForWinner = (board) => {
     }
 
     // Diagonals
-    // if(board[0] === board[4] && board[4] === board[8]) {
-    //     console.log("Diagonal Winner!");
-    //     return true
-    // }
-
-    if (checkForWinner(board[0], board[4], board[8])) {
+    if (checkSequence(board[0], board[4], board[8])) {
         console.log("Diagonal Winner!");
         return true
     }
-
-    // if(board[2] === board[4] && board[4] === board[6]) {
-    //     console.log("Diagonal Winner!")
-    //     return true
-    // }
-
-    if (checkForWinner(board[2], board[4], board[6])) {
+    
+    if (checkSequence(board[2], board[4], board[6])) {
         console.log("Diagonal Winner!");
         return true
     }

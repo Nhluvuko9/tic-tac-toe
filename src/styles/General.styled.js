@@ -19,14 +19,14 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h1`
-	color: ${(props) => props.primary ? props.theme.colors.secondary : props.theme.colors.text};
+	color: ${(props) => props.text ? props.theme.colors.primary : props.theme.colors.secondary};
 	font-size: 4rem;
 	font-family: 'Pacifico', cursive;
 	background-color: transparent;
 `;
 
 export const Subtitle = styled.h2`
-	color: ${(props) => props.primary ? props.theme.colors.secondary : props.theme.colors.text};
+	color: ${(props) => props.text ? props.theme.colors.primary : props.theme.colors.secondary};
 	font-size: 1.5rem;
 	font-family: 'Poppins', sans-serif;
 	font-weight: 200;
@@ -34,8 +34,17 @@ export const Subtitle = styled.h2`
 `;
 
 export const Text = styled.p`
-	color: ${(props) => props.primary ? props.theme.colors.secondary : props.theme.colors.text};
+	color: ${(props) => props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
 	font-size: 1.2rem;
 	padding: 10px;
 	background-color: transparent;
+
+	${(props) => props.theme.media.mobile} {
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		position: relative;
+		left: 40px;
+		top: 15px;
+	}
 `;

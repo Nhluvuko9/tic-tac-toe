@@ -11,8 +11,8 @@ export const lightTheme = {
 		gray: "#828282",
 		white: "#FFfFf0",
 		black: "#00000099",
-		purple: "#8437f9",
-		yellow: "#f9c811",
+		purple: "#bb98f1",
+		yellow: "#e4ce7b",
 
 		text: "#202124",
 	},
